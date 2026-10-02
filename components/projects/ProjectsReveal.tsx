@@ -14,9 +14,14 @@ export default function ProjectsReveal({
 }: ProjectsRevealProps) {
   return (
     <motion.div
+      className="
+        relative
+        w-full
+        pointer-events-auto
+      "
       initial={{
         opacity: 0,
-        y: 50,
+        y: 35,
       }}
       whileInView={{
         opacity: 1,
@@ -24,10 +29,10 @@ export default function ProjectsReveal({
       }}
       viewport={{
         once: true,
-        amount: 0.15,
+        amount: 0.12,
       }}
       transition={{
-        duration: 0.8,
+        duration: 0.75,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
