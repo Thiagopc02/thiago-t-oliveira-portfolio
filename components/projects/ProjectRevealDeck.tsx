@@ -5,10 +5,6 @@ import { motion } from "framer-motion";
 
 import { projects } from "./projectsData";
 
-/* =========================================================
-   PROJECT REVEAL DECK
-========================================================= */
-
 export default function ProjectRevealDeck() {
   return (
     <div
@@ -22,15 +18,11 @@ export default function ProjectRevealDeck() {
         items-center
         justify-center
         overflow-visible
-
         sm:min-h-[520px]
         lg:min-h-[600px]
       "
     >
-      {/* =====================================================
-          GLOW CENTRAL
-      ====================================================== */}
-
+      {/* GLOW CENTRAL */}
       <div
         aria-hidden="true"
         className="
@@ -38,32 +30,23 @@ export default function ProjectRevealDeck() {
           absolute
           left-1/2
           top-1/2
-
           h-[360px]
           w-[620px]
-
           -translate-x-1/2
           -translate-y-1/2
-
           rounded-full
-
           bg-cyan-400/[0.025]
-
           blur-[130px]
         "
       />
 
-      {/* =====================================================
-          BARALHO
-      ====================================================== */}
-
+      {/* BARALHO */}
       <div
         className="
           relative
           h-[410px]
           w-full
           max-w-[880px]
-
           sm:h-[470px]
           lg:h-[540px]
         "
@@ -72,94 +55,15 @@ export default function ProjectRevealDeck() {
           const isCenter = index === 1;
 
           return (
-            <motion.article
+            /*
+             * IMPORTANTE:
+             * Esta DIV externa posiciona a carta.
+             * Ela NÃO é animada.
+             */
+            <div
               key={project.id}
-
-              /* ===============================================
-                 ARRASTAR
-              ================================================ */
-
-              drag
-              dragSnapToOrigin
-              dragElastic={0.18}
-              dragMomentum={false}
-
-              /* ===============================================
-                 ENTRADA
-              ================================================ */
-
-              initial={{
-                opacity: 0,
-                y: 70,
-                scale: 0.9,
-                rotate: 0,
-              }}
-
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                scale: isCenter ? 1 : 0.96,
-                rotate: project.rotation,
-              }}
-
-              viewport={{
-                once: true,
-                amount: 0.2,
-              }}
-
-              transition={{
-                duration: 0.9,
-                delay: index * 0.12,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-
-              /* ===============================================
-                 HOVER
-              ================================================ */
-
-              whileHover={{
-                y: -16,
-                scale: isCenter ? 1.03 : 1,
-                rotate: 0,
-                zIndex: 30,
-              }}
-
-              /* ===============================================
-                 DURANTE O ARRASTE
-              ================================================ */
-
-              whileDrag={{
-                scale: 1.06,
-                rotate: 0,
-                zIndex: 50,
-                cursor: "grabbing",
-              }}
-
               className={`
-                group
                 absolute
-
-                cursor-grab
-                select-none
-                touch-none
-
-                overflow-hidden
-
-                rounded-[28px]
-
-                border
-                border-white/10
-
-                bg-[#050708]
-
-                shadow-[0_35px_100px_rgba(0,0,0,0.75)]
-
-                transition-colors
-                duration-500
-
-                hover:border-white/20
-
-                active:cursor-grabbing
 
                 ${
                   index === 0
@@ -225,212 +129,241 @@ export default function ProjectRevealDeck() {
                 }
               `}
             >
-              {/* =================================================
-                  IMAGEM
-              ================================================== */}
+              {/*
+               * =================================================
+               * CARTA ARRASTÁVEL
+               * =================================================
+               */}
 
-              <div className="absolute inset-0 overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  priority={index === 1}
-                  draggable={false}
-                  sizes="
-                    (max-width: 640px) 260px,
-                    (max-width: 1024px) 315px,
-                    370px
-                  "
-                  className={`
-                    pointer-events-none
-
-                    object-contain
-                    object-center
-
-                    transition-transform
-                    duration-700
-
-                    group-hover:scale-[1.04]
-
-                    ${project.imageClassName}
-                  `}
-                />
-              </div>
-
-              {/* =================================================
-                  OVERLAY
-              ================================================== */}
-
-              <div
-                aria-hidden="true"
+              <motion.article
+                drag
+                dragSnapToOrigin
+                dragMomentum={false}
+                dragElastic={0.12}
+                dragTransition={{
+                  bounceStiffness: 500,
+                  bounceDamping: 35,
+                }}
+                initial={{
+                  opacity: 0,
+                  y: 70,
+                  scale: 0.9,
+                  rotate: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  scale: isCenter ? 1 : 0.96,
+                  rotate: project.rotation,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.85,
+                  delay: index * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  scale: isCenter ? 1.025 : 1,
+                  rotate: 0,
+                }}
+                whileDrag={{
+                  scale: 1.07,
+                  rotate: 0,
+                  zIndex: 100,
+                  cursor: "grabbing",
+                }}
                 className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-
-                  bg-gradient-to-t
-
-                  from-black
-                  via-black/15
-                  to-transparent
-                "
-              />
-
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-
-                  bg-gradient-to-r
-
-                  from-black/20
-                  via-transparent
-                  to-black/20
-                "
-              />
-
-              {/* =================================================
-                  CONTEÚDO DA CARTA
-              ================================================== */}
-
-              <div
-                className="
-                  pointer-events-none
-
-                  absolute
-                  inset-x-0
-                  bottom-0
-                  z-10
-
-                  p-5
-
-                  sm:p-6
+                  group
+                  relative
+                  h-full
+                  w-full
+                  cursor-grab
+                  select-none
+                  touch-none
+                  overflow-hidden
+                  rounded-[28px]
+                  border
+                  border-white/10
+                  bg-[#050708]
+                  shadow-[0_35px_100px_rgba(0,0,0,0.75)]
+                  transition-colors
+                  duration-500
+                  hover:border-white/25
+                  active:cursor-grabbing
                 "
               >
-                <div className="flex items-center gap-2">
-                  <span
-                    className="
-                      font-mono
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.32em]
-                      text-cyan-300/70
+                {/* IMAGEM */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    overflow-hidden
+                  "
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    priority={index === 1}
+                    draggable={false}
+                    sizes="
+                      (max-width: 640px) 260px,
+                      (max-width: 1024px) 315px,
+                      370px
                     "
-                  >
-                    Projeto {project.number}
-                  </span>
-
-                  <span className="h-px w-7 bg-cyan-300/25" />
+                    className={`
+                      pointer-events-none
+                      select-none
+                      object-contain
+                      object-center
+                      transition-transform
+                      duration-700
+                      group-hover:scale-[1.04]
+                      ${project.imageClassName}
+                    `}
+                  />
                 </div>
 
-                <p
+                {/* OVERLAY INFERIOR */}
+                <div
+                  aria-hidden="true"
                   className="
-                    mt-3
-                    text-[9px]
-                    uppercase
-                    tracking-[0.22em]
-                    text-white/35
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-black
+                    via-black/15
+                    to-transparent
+                  "
+                />
+
+                {/* OVERLAY LATERAL */}
+                <div
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    bg-gradient-to-r
+                    from-black/20
+                    via-transparent
+                    to-black/20
+                  "
+                />
+
+                {/* CONTEÚDO */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-x-0
+                    bottom-0
+                    z-10
+                    p-5
+                    sm:p-6
                   "
                 >
-                  {project.subtitle}
-                </p>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="
+                        font-mono
+                        text-[9px]
+                        font-semibold
+                        uppercase
+                        tracking-[0.32em]
+                        text-cyan-300/70
+                      "
+                    >
+                      Projeto {project.number}
+                    </span>
 
-                <h3
+                    <span className="h-px w-7 bg-cyan-300/25" />
+                  </div>
+
+                  <p
+                    className="
+                      mt-3
+                      text-[9px]
+                      uppercase
+                      tracking-[0.22em]
+                      text-white/35
+                    "
+                  >
+                    {project.subtitle}
+                  </p>
+
+                  <h3
+                    className="
+                      mt-2
+                      text-xl
+                      font-semibold
+                      leading-tight
+                      tracking-[-0.035em]
+                      text-white
+                      sm:text-2xl
+                    "
+                  >
+                    {project.title}
+                  </h3>
+                </div>
+
+                {/* GLOW INFERIOR */}
+                <div
+                  aria-hidden="true"
                   className="
-                    mt-2
-                    text-xl
-                    font-semibold
-                    leading-tight
-                    tracking-[-0.035em]
-                    text-white
-
-                    sm:text-2xl
+                    pointer-events-none
+                    absolute
+                    bottom-[-80px]
+                    left-1/2
+                    h-[150px]
+                    w-[80%]
+                    -translate-x-1/2
+                    rounded-full
+                    bg-cyan-400/[0.035]
+                    blur-[65px]
                   "
-                >
-                  {project.title}
-                </h3>
-              </div>
+                />
 
-              {/* =================================================
-                  GLOW INFERIOR
-              ================================================== */}
-
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-
-                  absolute
-                  bottom-[-80px]
-                  left-1/2
-
-                  h-[150px]
-                  w-[80%]
-
-                  -translate-x-1/2
-
-                  rounded-full
-
-                  bg-cyan-400/[0.035]
-
-                  blur-[65px]
-                "
-              />
-
-              {/* =================================================
-                  LINHA SUPERIOR
-              ================================================== */}
-
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-
-                  absolute
-                  left-[15%]
-                  right-[15%]
-                  top-0
-
-                  h-px
-
-                  bg-gradient-to-r
-
-                  from-transparent
-                  via-white/20
-                  to-transparent
-                "
-              />
-            </motion.article>
+                {/* LINHA SUPERIOR */}
+                <div
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none
+                    absolute
+                    left-[15%]
+                    right-[15%]
+                    top-0
+                    h-px
+                    bg-gradient-to-r
+                    from-transparent
+                    via-white/20
+                    to-transparent
+                  "
+                />
+              </motion.article>
+            </div>
           );
         })}
       </div>
 
-      {/* =====================================================
-          TEXTO INFERIOR
-      ====================================================== */}
-
+      {/* TEXTO INFERIOR */}
       <div
         className="
           pointer-events-none
-
           absolute
           bottom-1
           left-1/2
-
           -translate-x-1/2
-
           whitespace-nowrap
-
           font-mono
-
           text-[8px]
           uppercase
-
           tracking-[0.42em]
-
           text-white/15
         "
       >
