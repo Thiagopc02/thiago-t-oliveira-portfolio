@@ -1,36 +1,58 @@
 /* =========================================================
-   TIPO DOS PROJETOS
+   TIPOS
 ========================================================= */
 
 export type ProjectCard = {
   id: number;
 
+  // Número visual do projeto: 01, 02, 03...
+  number: string;
+
   title: string;
+
+  // Categoria / subtítulo exibido nas cartas
   subtitle: string;
 
   description: string;
 
   technologies: string[];
 
-  /*
-   * Imagem utilizada no projeto/card/modal.
-   * Os arquivos ficam dentro de /public.
-   */
+  /* =======================================================
+     IMAGENS
+  ======================================================= */
+
+  // Imagem usada no ProjectRevealDeck
+  image: string;
+
+  // Imagem usada no ProjectCard e ProjectModal
   backImage: string;
 
-  /*
-   * Link do projeto publicado.
-   *
-   * É opcional porque podemos ter algum projeto
-   * que ainda não esteja disponível publicamente.
-   */
+  /* =======================================================
+     CONFIGURAÇÃO VISUAL DO BARALHO
+  ======================================================= */
+
+  rotation: number;
+
+  imageClassName: string;
+
+  /* =======================================================
+     LINKS
+  ======================================================= */
+
   liveUrl?: string;
 
-  /*
-   * Link do repositório no GitHub.
-   */
   githubUrl?: string;
 };
+
+/*
+ * Mantemos também o tipo Project para garantir
+ * compatibilidade com qualquer componente antigo
+ * que ainda importe:
+ *
+ * import type { Project } from "./projectsData";
+ */
+
+export type Project = ProjectCard;
 
 /* =========================================================
    PROJETOS
@@ -44,6 +66,8 @@ export const projects: ProjectCard[] = [
 
   {
     id: 1,
+
+    number: "01",
 
     title: "Império Bebidas & Tabacos",
 
@@ -60,92 +84,95 @@ export const projects: ProjectCard[] = [
       "Tailwind CSS",
     ],
 
+    image: "/projeto01.png",
+
     backImage: "/projeto01.png",
 
-    /*
-     * SITE PUBLICADO
-     */
-    liveUrl: "https://site-imperio.vercel.app",
+    rotation: -5,
 
-    /*
-     * GITHUB
-     */
+    imageClassName:
+      "scale-[0.96] sm:scale-[0.98] md:scale-[1.00] lg:scale-[1.02]",
+
+    liveUrl:
+      "https://site-imperio.vercel.app",
+
     githubUrl:
       "https://github.com/Thiagopc02/site-imperio",
   },
 
   /* =======================================================
      PROJETO 02
-     GRANALTA
+     IMPÉRIO CHALÉS
   ======================================================= */
 
   {
     id: 2,
 
-    title: "Granalta",
+    number: "02",
 
-    subtitle: "Plataforma Digital",
+    title: "Império Chalés",
+
+    subtitle: "Hospedagem & Experiência Digital",
 
     description:
-      "Experiência digital responsiva criada para apresentação de pacotes, conteúdo e conversão de clientes.",
+      "Projeto digital desenvolvido para apresentação dos chalés, divulgação do empreendimento e experiência de hospedagem.",
 
     technologies: [
       "React",
+      "Next.js",
       "TypeScript",
-      "Vercel",
+      "Tailwind CSS",
     ],
+
+    image: "/projeto02.png",
 
     backImage: "/projeto02.png",
 
-    /*
-     * Quando tivermos certeza do endereço publicado,
-     * basta colocar o link aqui.
-     *
-     * Exemplo:
-     * liveUrl: "https://seu-site.vercel.app",
-     */
+    rotation: 0,
+
+    imageClassName:
+      "scale-[1.08] sm:scale-[1.10] md:scale-[1.12] lg:scale-[1.14]",
 
     liveUrl: "",
 
-    /*
-     * Repositório do projeto.
-     */
-    githubUrl: "https://github.com/granalta/granalta",
+    githubUrl: "",
   },
 
   /* =======================================================
      PROJETO 03
-     PROJETO ESPECIAL
+     AÇAÍ DO BRUXO
   ======================================================= */
 
   {
     id: 3,
 
-    title: "Projeto Especial",
+    number: "03",
 
-    subtitle: "Web Experience",
+    title: "Açaí do Bruxo",
+
+    subtitle: "Branding & Experiência Web",
 
     description:
-      "Projeto desenvolvido com foco em interface moderna, animações, experiência visual e navegação responsiva.",
+      "Projeto visual e digital criado para transformar a identidade do Açaí do Bruxo em uma experiência moderna e marcante.",
 
     technologies: [
-      "Next.js",
-      "GSAP",
+      "React",
+      "TypeScript",
       "Tailwind CSS",
+      "UI/UX",
     ],
+
+    image: "/projeto03.png",
 
     backImage: "/projeto03.png",
 
-    /*
-     * Ainda vamos colocar o endereço correto
-     * deste projeto.
-     */
+    rotation: 5,
+
+    imageClassName:
+      "scale-[1.20] sm:scale-[1.24] md:scale-[1.28] lg:scale-[1.32]",
+
     liveUrl: "",
 
-    /*
-     * Caso queira disponibilizar o código,
-     * coloque o GitHub aqui.
-     */
     githubUrl: "",
   },
 ];

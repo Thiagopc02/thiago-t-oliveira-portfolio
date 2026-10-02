@@ -1,163 +1,35 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+import { projects } from "./projectsData";
 
 /* =========================================================
-   TIPOS
-========================================================= */
-
-type Project = {
-  id: number;
-  number: string;
-  title: string;
-  image: string;
-  description: string;
-  technologies: string[];
-  rotation: number;
-  imageClassName: string;
-};
-
-/* =========================================================
-   PROJETOS
-========================================================= */
-
-const projects: Project[] = [
-  {
-    id: 1,
-    number: "01",
-    title: "Império Bebidas & Tabacos",
-    image: "/projeto01.png",
-
-    description:
-      "Plataforma completa para uma distribuidora, com catálogo, carrinho, pedidos, autenticação e painel administrativo.",
-
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Firebase",
-      "Firestore",
-      "Tailwind CSS",
-    ],
-
-    rotation: -5,
-
-    /*
-     * Ajuste visual da imagem 01.
-     */
-    imageClassName:
-      "scale-[0.96] sm:scale-[0.98] md:scale-[1.00] lg:scale-[1.02]",
-  },
-
-  {
-    id: 2,
-    number: "02",
-    title: "Império Chalés",
-    image: "/projeto02.png",
-
-    description:
-      "Projeto digital desenvolvido para apresentação dos chalés, divulgação do empreendimento e experiência de hospedagem.",
-
-    technologies: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-    ],
-
-    rotation: 0,
-
-    /*
-     * O PNG 02 possui mais área transparente,
-     * então recebe uma escala um pouco maior.
-     */
-    imageClassName:
-      "scale-[1.08] sm:scale-[1.10] md:scale-[1.12] lg:scale-[1.14]",
-  },
-
-  {
-    id: 3,
-    number: "03",
-    title: "Açaí do Bruxo",
-    image: "/projeto03.png",
-
-    description:
-      "Projeto visual e digital criado para transformar a identidade do Açaí do Bruxo em uma experiência moderna e marcante.",
-
-    technologies: [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "UI/UX",
-    ],
-
-    rotation: 5,
-
-    /*
-     * O PNG 03 possui bastante transparência,
-     * portanto precisa ser ampliado.
-     */
-    imageClassName:
-      "scale-[1.20] sm:scale-[1.24] md:scale-[1.28] lg:scale-[1.32]",
-  },
-];
-
-/* =========================================================
-   COMPONENTE
+   PROJECT REVEAL DECK
 ========================================================= */
 
 export default function ProjectRevealDeck() {
-  const [selectedProject, setSelectedProject] =
-    useState<Project | null>(null);
-
-  const [isAnimating, setIsAnimating] =
-    useState(false);
-
-  /* =======================================================
-     SELECIONAR CARTA
-  ======================================================= */
-
-  function handleSelect(project: Project) {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setSelectedProject(project);
-
-    window.setTimeout(() => {
-      setIsAnimating(false);
-    }, 1400);
-  }
-
-  /* =======================================================
-     VOLTAR
-  ======================================================= */
-
-  function handleBack() {
-    if (isAnimating) return;
-
-    setSelectedProject(null);
-  }
-
   return (
-    <section
+    <div
       className="
         relative
         mx-auto
+        flex
+        min-h-[460px]
         w-full
-        max-w-[1500px]
-        overflow-hidden
-        px-4
-        pb-28
-        pt-10
-        sm:px-6
-        md:px-8
-        lg:px-10
-        lg:pt-14
+        max-w-[1050px]
+        items-center
+        justify-center
+        overflow-visible
+
+        sm:min-h-[520px]
+        lg:min-h-[600px]
       "
     >
-      {/* ===================================================
-          LUZ CENTRAL
-      ==================================================== */}
+      {/* =====================================================
+          GLOW CENTRAL
+      ====================================================== */}
 
       <div
         aria-hidden="true"
@@ -166,608 +38,357 @@ export default function ProjectRevealDeck() {
           absolute
           left-1/2
           top-1/2
-          h-[500px]
-          w-[700px]
+
+          h-[360px]
+          w-[620px]
+
           -translate-x-1/2
           -translate-y-1/2
+
           rounded-full
-          bg-cyan-400/[0.035]
-          blur-[160px]
+
+          bg-cyan-400/[0.025]
+
+          blur-[130px]
         "
       />
 
-      <AnimatePresence mode="wait">
-        {/* =================================================
-            BARALHO COM AS 3 CARTAS
-        ================================================== */}
+      {/* =====================================================
+          BARALHO
+      ====================================================== */}
 
-        {!selectedProject && (
-          <motion.div
-            key="project-deck"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.96,
-            }}
-            transition={{
-              duration: 0.4,
-            }}
-            className="
-              relative
-              z-10
-              mx-auto
-              flex
-              min-h-[650px]
-              w-full
-              max-w-[1180px]
-              items-center
-              justify-center
+      <div
+        className="
+          relative
+          h-[410px]
+          w-full
+          max-w-[880px]
 
-              gap-0
+          sm:h-[470px]
+          lg:h-[540px]
+        "
+      >
+        {projects.map((project, index) => {
+          const isCenter = index === 1;
 
-              sm:min-h-[680px]
-
-              md:gap-0
-
-              lg:min-h-[700px]
-              lg:gap-1
-            "
-          >
-            {projects.map((project, index) => {
-              return (
-                <motion.button
-                  key={project.id}
-                  type="button"
-                  aria-label={`Revelar projeto ${project.title}`}
-                  onClick={() =>
-                    handleSelect(project)
-                  }
-
-                  /* =======================================
-                     QUEDA INICIAL
-                  ======================================== */
-
-                  initial={{
-                    opacity: 0,
-
-                    y:
-                      index === 0
-                        ? -500
-                        : index === 1
-                          ? -650
-                          : -800,
-
-                    x:
-                      index === 0
-                        ? -80
-                        : index === 2
-                          ? 80
-                          : 0,
-
-                    rotate:
-                      index === 0
-                        ? -25
-                        : index === 1
-                          ? 8
-                          : 25,
-
-                    scale: 0.6,
-                  }}
-
-                  animate={{
-                    opacity: 1,
-
-                    x: 0,
-
-                    y:
-                      index === 1
-                        ? 0
-                        : 10,
-
-                    rotate:
-                      project.rotation,
-
-                    scale: 1,
-                  }}
-
-                  transition={{
-                    duration: 1.15,
-
-                    delay:
-                      0.15 +
-                      index * 0.22,
-
-                    type: "spring",
-
-                    stiffness: 70,
-
-                    damping: 13,
-                  }}
-
-                  /* =======================================
-                     HOVER
-                  ======================================== */
-
-                  whileHover={{
-                    y: -18,
-
-                    scale: 1.04,
-
-                    rotate:
-                      project.rotation *
-                      0.55,
-
-                    zIndex: 40,
-
-                    transition: {
-                      duration: 0.3,
-                    },
-                  }}
-
-                  whileTap={{
-                    scale: 0.97,
-                  }}
-
-                  className={`
-                    group
-                    relative
-                    flex
-                    shrink-0
-                    items-center
-                    justify-center
-                    border-0
-                    bg-transparent
-                    p-0
-                    outline-none
-
-                    h-[400px]
-                    w-[33.333%]
-
-                    sm:h-[450px]
-
-                    md:h-[500px]
-
-                    lg:h-[560px]
-                    lg:max-w-[350px]
-
-                    xl:h-[590px]
-                    xl:max-w-[365px]
-
-                    ${
-                      index === 1
-                        ? "z-20"
-                        : "z-10"
-                    }
-                  `}
-                >
-                  {/* =====================================
-                      BRILHO ATRÁS
-                  ====================================== */}
-
-                  <div
-                    aria-hidden="true"
-                    className="
-                      pointer-events-none
-                      absolute
-                      left-1/2
-                      top-1/2
-                      h-[65%]
-                      w-[70%]
-                      -translate-x-1/2
-                      -translate-y-1/2
-                      rounded-full
-                      bg-cyan-400/[0.06]
-                      opacity-50
-                      blur-[85px]
-                      transition
-                      duration-500
-                      group-hover:opacity-100
-                    "
-                  />
-
-                  {/* =====================================
-                      IMAGEM DA CARTA
-                  ====================================== */}
-
-                  <img
-                    src={project.image}
-                    alt={`Carta do projeto ${project.title}`}
-                    draggable={false}
-                    className={`
-                      pointer-events-none
-                      block
-                      h-full
-                      w-full
-                      select-none
-                      object-contain
-                      object-center
-                      transition
-                      duration-500
-                      drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]
-                      group-hover:drop-shadow-[0_25px_55px_rgba(34,211,238,0.18)]
-
-                      ${project.imageClassName}
-                    `}
-                  />
-                </motion.button>
-              );
-            })}
-          </motion.div>
-        )}
-
-        {/* =================================================
-            PROJETO SELECIONADO
-        ================================================== */}
-
-        {selectedProject && (
-          <motion.div
-            key={`selected-${selectedProject.id}`}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.3,
-            }}
-            className="
-              relative
-              z-20
-              mx-auto
-              flex
-              min-h-[700px]
-              w-full
-              max-w-[1150px]
-              items-center
-              justify-center
-            "
-          >
-            {/* =============================================
-                CARTA ORIGINAL AUMENTANDO E SUMINDO
-            ============================================== */}
-
-            <motion.div
-              initial={{
-                opacity: 1,
-                scale: 0.8,
-                rotateY: 0,
-                rotateZ:
-                  selectedProject.rotation,
-              }}
-              animate={{
-                opacity: [1, 1, 0],
-
-                scale: [
-                  0.8,
-                  1.25,
-                  2.3,
-                ],
-
-                rotateY: [
-                  0,
-                  180,
-                  360,
-                ],
-
-                rotateZ: [
-                  selectedProject.rotation,
-                  0,
-                  0,
-                ],
-
-                filter: [
-                  "blur(0px)",
-                  "blur(0px)",
-                  "blur(18px)",
-                ],
-              }}
-              transition={{
-                duration: 1.2,
-
-                times: [
-                  0,
-                  0.66,
-                  1,
-                ],
-
-                ease: [
-                  0.22,
-                  1,
-                  0.36,
-                  1,
-                ],
-              }}
-              className="
-                pointer-events-none
-                absolute
-                z-30
-                flex
-                h-[500px]
-                w-[320px]
-                items-center
-                justify-center
-                [transform-style:preserve-3d]
-
-                md:h-[570px]
-                md:w-[360px]
-              "
-            >
-              <img
-                src={selectedProject.image}
-                alt=""
-                draggable={false}
-                className={`
-                  h-full
-                  w-full
-                  select-none
-                  object-contain
-
-                  ${selectedProject.imageClassName}
-                `}
-              />
-            </motion.div>
-
-            {/* =============================================
-                CARTA / PAINEL REVELADO
-            ============================================== */}
-
-            <motion.div
+          return (
+            <motion.article
+              key={project.id}
               initial={{
                 opacity: 0,
-                scale: 0.7,
-                rotateY: -90,
-                y: 30,
+                y: 70,
+                scale: 0.9,
+                rotate: 0,
               }}
-              animate={{
+              whileInView={{
                 opacity: 1,
-                scale: 1,
-                rotateY: 0,
                 y: 0,
+                scale: isCenter ? 1 : 0.96,
+                rotate: project.rotation,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.2,
               }}
               transition={{
-                duration: 0.8,
-                delay: 0.85,
-
-                ease: [
-                  0.22,
-                  1,
-                  0.36,
-                  1,
-                ],
+                duration: 0.9,
+                delay: index * 0.12,
+                ease: [0.22, 1, 0.36, 1],
               }}
-              className="
-                relative
-                z-20
-                w-full
-                max-w-[720px]
+              whileHover={{
+                y: -16,
+                scale: isCenter ? 1.03 : 1,
+                rotate: 0,
+                zIndex: 20,
+              }}
+              className={`
+                group
+                absolute
+
                 overflow-hidden
-                rounded-[32px]
+
+                rounded-[28px]
+
                 border
                 border-white/10
-                bg-[#05080b]/95
-                shadow-[0_30px_120px_rgba(0,0,0,0.85),0_0_80px_rgba(34,211,238,0.06)]
-                backdrop-blur-xl
-              "
+
+                bg-[#050708]
+
+                shadow-[0_35px_100px_rgba(0,0,0,0.75)]
+
+                transition-colors
+                duration-500
+
+                hover:border-white/20
+
+                ${
+                  index === 0
+                    ? `
+                      left-[2%]
+                      top-[15%]
+                      z-[1]
+
+                      h-[300px]
+                      w-[240px]
+
+                      sm:left-[4%]
+                      sm:h-[360px]
+                      sm:w-[290px]
+
+                      lg:left-[2%]
+                      lg:h-[420px]
+                      lg:w-[335px]
+                    `
+                    : ""
+                }
+
+                ${
+                  index === 1
+                    ? `
+                      left-1/2
+                      top-[2%]
+                      z-[5]
+
+                      h-[335px]
+                      w-[260px]
+
+                      -translate-x-1/2
+
+                      sm:h-[400px]
+                      sm:w-[315px]
+
+                      lg:h-[480px]
+                      lg:w-[370px]
+                    `
+                    : ""
+                }
+
+                ${
+                  index === 2
+                    ? `
+                      right-[2%]
+                      top-[15%]
+                      z-[1]
+
+                      h-[300px]
+                      w-[240px]
+
+                      sm:right-[4%]
+                      sm:h-[360px]
+                      sm:w-[290px]
+
+                      lg:right-[2%]
+                      lg:h-[420px]
+                      lg:w-[335px]
+                    `
+                    : ""
+                }
+              `}
             >
-              {/* ===========================================
-                  LUZ
-              ============================================ */}
+              {/* =================================================
+                  IMAGEM
+              ================================================== */}
+
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  priority={index === 1}
+                  sizes="
+                    (max-width: 640px) 260px,
+                    (max-width: 1024px) 315px,
+                    370px
+                  "
+                  className={`
+                    object-contain
+                    object-center
+
+                    transition-transform
+                    duration-700
+
+                    group-hover:scale-[1.04]
+
+                    ${project.imageClassName}
+                  `}
+                />
+              </div>
+
+              {/* =================================================
+                  OVERLAY
+              ================================================== */}
+
+              <div
+                aria-hidden="true"
+                className="
+                  absolute
+                  inset-0
+
+                  bg-gradient-to-t
+
+                  from-black
+                  via-black/15
+                  to-transparent
+                "
+              />
+
+              <div
+                aria-hidden="true"
+                className="
+                  absolute
+                  inset-0
+
+                  bg-gradient-to-r
+
+                  from-black/20
+                  via-transparent
+                  to-black/20
+                "
+              />
+
+              {/* =================================================
+                  CONTEÚDO DA CARTA
+              ================================================== */}
+
+              <div
+                className="
+                  absolute
+                  inset-x-0
+                  bottom-0
+                  z-10
+
+                  p-5
+
+                  sm:p-6
+                "
+              >
+                <div className="flex items-center gap-2">
+                  <span
+                    className="
+                      font-mono
+                      text-[9px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.32em]
+                      text-cyan-300/70
+                    "
+                  >
+                    Projeto {project.number}
+                  </span>
+
+                  <span className="h-px w-7 bg-cyan-300/25" />
+                </div>
+
+                <p
+                  className="
+                    mt-3
+                    text-[9px]
+                    uppercase
+                    tracking-[0.22em]
+                    text-white/35
+                  "
+                >
+                  {project.subtitle}
+                </p>
+
+                <h3
+                  className="
+                    mt-2
+                    text-xl
+                    font-semibold
+                    leading-tight
+                    tracking-[-0.035em]
+                    text-white
+
+                    sm:text-2xl
+                  "
+                >
+                  {project.title}
+                </h3>
+              </div>
+
+              {/* =================================================
+                  GLOW INFERIOR
+              ================================================== */}
 
               <div
                 aria-hidden="true"
                 className="
                   pointer-events-none
+
                   absolute
+                  bottom-[-80px]
                   left-1/2
-                  top-0
-                  h-[250px]
-                  w-[75%]
+
+                  h-[150px]
+                  w-[80%]
+
                   -translate-x-1/2
+
                   rounded-full
-                  bg-cyan-400/[0.06]
-                  blur-[110px]
+
+                  bg-cyan-400/[0.035]
+
+                  blur-[65px]
                 "
               />
 
-              {/* ===========================================
-                  CABEÇALHO
-              ============================================ */}
+              {/* =================================================
+                  LINHA SUPERIOR
+              ================================================== */}
 
               <div
+                aria-hidden="true"
                 className="
-                  relative
-                  flex
-                  items-center
-                  justify-between
-                  border-b
-                  border-white/10
-                  px-6
-                  py-5
-                  sm:px-8
+                  pointer-events-none
+
+                  absolute
+                  left-[15%]
+                  right-[15%]
+                  top-0
+
+                  h-px
+
+                  bg-gradient-to-r
+
+                  from-transparent
+                  via-white/20
+                  to-transparent
                 "
-              >
-                <span
-                  className="
-                    text-[9px]
-                    uppercase
-                    tracking-[0.35em]
-                    text-cyan-300/50
-                  "
-                >
-                  Projeto{" "}
-                  {selectedProject.number}
-                </span>
+              />
+            </motion.article>
+          );
+        })}
+      </div>
 
-                <button
-                  type="button"
-                  onClick={handleBack}
-                  className="
-                    rounded-full
-                    border
-                    border-white/10
-                    bg-white/[0.02]
-                    px-5
-                    py-2
-                    text-xs
-                    text-white/60
-                    transition
-                    hover:border-white/25
-                    hover:bg-white/[0.06]
-                    hover:text-white
-                  "
-                >
-                  Voltar
-                </button>
-              </div>
+      {/* =====================================================
+          TEXTO INFERIOR
+      ====================================================== */}
 
-              {/* ===========================================
-                  CONTEÚDO
-              ============================================ */}
+      <div
+        className="
+          pointer-events-none
 
-              <div
-                className="
-                  relative
-                  px-6
-                  py-10
-                  sm:px-8
-                  md:px-10
-                  md:py-12
-                "
-              >
-                <p
-                  className="
-                    mb-4
-                    text-[10px]
-                    uppercase
-                    tracking-[0.28em]
-                    text-white/30
-                  "
-                >
-                  Projeto selecionado
-                </p>
+          absolute
+          bottom-1
+          left-1/2
 
-                <h3
-                  className="
-                    max-w-[620px]
-                    text-3xl
-                    font-semibold
-                    leading-tight
-                    tracking-[-0.04em]
-                    text-white
+          -translate-x-1/2
 
-                    sm:text-4xl
+          whitespace-nowrap
 
-                    md:text-5xl
-                  "
-                >
-                  {selectedProject.title}
-                </h3>
+          font-mono
 
-                <p
-                  className="
-                    mt-6
-                    max-w-[620px]
-                    text-sm
-                    leading-7
-                    text-zinc-400
+          text-[8px]
+          uppercase
 
-                    sm:text-base
-                    sm:leading-8
-                  "
-                >
-                  {
-                    selectedProject.description
-                  }
-                </p>
+          tracking-[0.42em]
 
-                {/* =========================================
-                    TECNOLOGIAS
-                ========================================== */}
-
-                <div
-                  className="
-                    mt-8
-                    flex
-                    flex-wrap
-                    gap-2
-                  "
-                >
-                  {selectedProject.technologies.map(
-                    (technology) => (
-                      <span
-                        key={technology}
-                        className="
-                          rounded-full
-                          border
-                          border-white/10
-                          bg-white/[0.025]
-                          px-4
-                          py-2
-                          text-[9px]
-                          uppercase
-                          tracking-[0.15em]
-                          text-white/50
-                        "
-                      >
-                        {technology}
-                      </span>
-                    ),
-                  )}
-                </div>
-
-                {/* =========================================
-                    RODAPÉ
-                ========================================== */}
-
-                <div
-                  className="
-                    mt-10
-                    flex
-                    items-center
-                    justify-between
-                    border-t
-                    border-white/10
-                    pt-6
-                  "
-                >
-                  <span
-                    className="
-                      text-[9px]
-                      uppercase
-                      tracking-[0.3em]
-                      text-white/25
-                    "
-                  >
-                    Thiago Torres
-                  </span>
-
-                  <span
-                    className="
-                      text-xs
-                      font-medium
-                      text-cyan-300/60
-                    "
-                  >
-                    Projeto{" "}
-                    {
-                      selectedProject.number
-                    }
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+          text-white/15
+        "
+      >
+        Select_Project
+      </div>
+    </div>
   );
 }
