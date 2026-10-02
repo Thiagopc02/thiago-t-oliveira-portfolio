@@ -74,36 +74,74 @@ export default function ProjectRevealDeck() {
           return (
             <motion.article
               key={project.id}
+
+              /* ===============================================
+                 ARRASTAR
+              ================================================ */
+
+              drag
+              dragSnapToOrigin
+              dragElastic={0.18}
+              dragMomentum={false}
+
+              /* ===============================================
+                 ENTRADA
+              ================================================ */
+
               initial={{
                 opacity: 0,
                 y: 70,
                 scale: 0.9,
                 rotate: 0,
               }}
+
               whileInView={{
                 opacity: 1,
                 y: 0,
                 scale: isCenter ? 1 : 0.96,
                 rotate: project.rotation,
               }}
+
               viewport={{
                 once: true,
                 amount: 0.2,
               }}
+
               transition={{
                 duration: 0.9,
                 delay: index * 0.12,
                 ease: [0.22, 1, 0.36, 1],
               }}
+
+              /* ===============================================
+                 HOVER
+              ================================================ */
+
               whileHover={{
                 y: -16,
                 scale: isCenter ? 1.03 : 1,
                 rotate: 0,
-                zIndex: 20,
+                zIndex: 30,
               }}
+
+              /* ===============================================
+                 DURANTE O ARRASTE
+              ================================================ */
+
+              whileDrag={{
+                scale: 1.06,
+                rotate: 0,
+                zIndex: 50,
+                cursor: "grabbing",
+              }}
+
               className={`
                 group
                 absolute
+
+                cursor-grab
+                select-none
+                touch-none
 
                 overflow-hidden
 
@@ -120,6 +158,8 @@ export default function ProjectRevealDeck() {
                 duration-500
 
                 hover:border-white/20
+
+                active:cursor-grabbing
 
                 ${
                   index === 0
@@ -195,12 +235,15 @@ export default function ProjectRevealDeck() {
                   alt={project.title}
                   fill
                   priority={index === 1}
+                  draggable={false}
                   sizes="
                     (max-width: 640px) 260px,
                     (max-width: 1024px) 315px,
                     370px
                   "
                   className={`
+                    pointer-events-none
+
                     object-contain
                     object-center
 
@@ -221,6 +264,7 @@ export default function ProjectRevealDeck() {
               <div
                 aria-hidden="true"
                 className="
+                  pointer-events-none
                   absolute
                   inset-0
 
@@ -235,6 +279,7 @@ export default function ProjectRevealDeck() {
               <div
                 aria-hidden="true"
                 className="
+                  pointer-events-none
                   absolute
                   inset-0
 
@@ -252,6 +297,8 @@ export default function ProjectRevealDeck() {
 
               <div
                 className="
+                  pointer-events-none
+
                   absolute
                   inset-x-0
                   bottom-0
