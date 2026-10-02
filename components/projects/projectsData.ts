@@ -85,7 +85,7 @@ export const projects: ProjectCard[] = [
       "scale-[0.96] sm:scale-[0.98] md:scale-[1.00] lg:scale-[1.02]",
 
     /* SITE NO AR */
-    liveUrl: "https://www.imperioistribuidora3015.com.br",
+    liveUrl: "https://www.imperiodistribuidora3015.com.br",
 
     /* REPOSITÓRIO */
     githubUrl: "https://github.com/Thiagopc02/site-imperio",
