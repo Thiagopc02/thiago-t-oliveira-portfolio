@@ -5,52 +5,43 @@
 export type ProjectCard = {
   id: number;
 
-  // Número visual do projeto: 01, 02, 03...
+  // Número visual
   number: string;
 
+  // Nome do projeto
   title: string;
 
-  // Categoria / subtítulo exibido nas cartas
+  // Categoria / subtítulo
   subtitle: string;
 
+  // Descrição
   description: string;
 
+  // Tecnologias
   technologies: string[];
 
-  /* =======================================================
-     IMAGENS
-  ======================================================= */
-
-  // Imagem usada no ProjectRevealDeck
+  // Imagem principal
   image: string;
 
-  // Imagem usada no ProjectCard e ProjectModal
+  // Imagem usada em cards / modal
   backImage: string;
 
-  /* =======================================================
-     CONFIGURAÇÃO VISUAL DO BARALHO
-  ======================================================= */
-
+  // Rotação da carta
   rotation: number;
 
+  // Ajuste individual da imagem
   imageClassName: string;
 
-  /* =======================================================
-     LINKS
-  ======================================================= */
-
+  // Site publicado
   liveUrl?: string;
 
+  // GitHub
   githubUrl?: string;
 };
 
-/*
- * Mantemos também o tipo Project para garantir
- * compatibilidade com qualquer componente antigo
- * que ainda importe:
- *
- * import type { Project } from "./projectsData";
- */
+/* =========================================================
+   COMPATIBILIDADE
+========================================================= */
 
 export type Project = ProjectCard;
 
@@ -93,11 +84,11 @@ export const projects: ProjectCard[] = [
     imageClassName:
       "scale-[0.96] sm:scale-[0.98] md:scale-[1.00] lg:scale-[1.02]",
 
-    liveUrl:
-      "https://site-imperio.vercel.app",
+    /* SITE NO AR */
+    liveUrl: "https://www.imperioistribuidora3015.com.br",
 
-    githubUrl:
-      "https://github.com/Thiagopc02/site-imperio",
+    /* REPOSITÓRIO */
+    githubUrl: "https://github.com/Thiagopc02/site-imperio",
   },
 
   /* =======================================================
@@ -133,8 +124,10 @@ export const projects: ProjectCard[] = [
     imageClassName:
       "scale-[1.08] sm:scale-[1.10] md:scale-[1.12] lg:scale-[1.14]",
 
-    liveUrl: "",
+    /* SITE NO AR */
+    liveUrl: "https://imperio-chales-site.vercel.app/",
 
+    /* SEM LINK DO GITHUB POR ENQUANTO */
     githubUrl: "",
   },
 
@@ -171,8 +164,10 @@ export const projects: ProjectCard[] = [
     imageClassName:
       "scale-[1.20] sm:scale-[1.24] md:scale-[1.28] lg:scale-[1.32]",
 
-    liveUrl: "",
+    /* SITE NO AR */
+    liveUrl: "https://acai-do-bruxo.vercel.app/",
 
+    /* SEM LINK DO GITHUB POR ENQUANTO */
     githubUrl: "",
   },
 ];
