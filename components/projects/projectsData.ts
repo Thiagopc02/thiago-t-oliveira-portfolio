@@ -1,30 +1,56 @@
-export type Project = {
+/* =========================================================
+   TIPO DOS PROJETOS
+========================================================= */
+
+export type ProjectCard = {
   id: number;
+
   title: string;
-  category: string;
+  subtitle: string;
+
   description: string;
-  longDescription: string;
-  image: string;
+
   technologies: string[];
-  features: string[];
-  year: string;
-  status: string;
+
+  /*
+   * Imagem utilizada no projeto/card/modal.
+   * Os arquivos ficam dentro de /public.
+   */
+  backImage: string;
+
+  /*
+   * Link do projeto publicado.
+   *
+   * É opcional porque podemos ter algum projeto
+   * que ainda não esteja disponível publicamente.
+   */
   liveUrl?: string;
+
+  /*
+   * Link do repositório no GitHub.
+   */
   githubUrl?: string;
 };
 
-export const projects: Project[] = [
+/* =========================================================
+   PROJETOS
+========================================================= */
+
+export const projects: ProjectCard[] = [
+  /* =======================================================
+     PROJETO 01
+     IMPÉRIO BEBIDAS & TABACOS
+  ======================================================= */
+
   {
     id: 1,
+
     title: "Império Bebidas & Tabacos",
-    category: "E-commerce & Sistema Web",
+
+    subtitle: "E-commerce & Sistema Web",
+
     description:
       "Plataforma completa para uma distribuidora, com catálogo, carrinho, pedidos, autenticação e painel administrativo.",
-
-    longDescription:
-      "Projeto desenvolvido para digitalizar a operação da Império Bebidas & Tabacos. A plataforma reúne catálogo de produtos, autenticação de clientes, carrinho persistente, endereços, formas de pagamento, pedidos e painel administrativo.",
-
-    image: "/projects/imperio-bebidas.jpg",
 
     technologies: [
       "Next.js",
@@ -34,112 +60,98 @@ export const projects: Project[] = [
       "Tailwind CSS",
     ],
 
-    features: [
-      "Autenticação de clientes",
-      "Catálogo de produtos",
-      "Carrinho persistente",
-      "Cadastro de endereços",
-      "Pedidos online",
-      "Painel administrativo",
-      "Integração com Firebase",
-    ],
+    backImage: "/projeto01.png",
 
-    year: "2026",
-    status: "Projeto completo",
+    /*
+     * SITE PUBLICADO
+     */
+    liveUrl: "https://site-imperio.vercel.app",
+
+    /*
+     * GITHUB
+     */
+    githubUrl:
+      "https://github.com/Thiagopc02/site-imperio",
   },
+
+  /* =======================================================
+     PROJETO 02
+     GRANALTA
+  ======================================================= */
 
   {
     id: 2,
-    title: "Império Chalés",
-    category: "Website & Reservas",
+
+    title: "Granalta",
+
+    subtitle: "Plataforma Digital",
+
     description:
-      "Website institucional para hospedagem, desenvolvido para apresentar o empreendimento e facilitar o contato com hóspedes.",
-
-    longDescription:
-      "Projeto voltado para apresentação profissional da Império Chalés, com foco em experiência visual, informações sobre hospedagem, localização, serviços, contato e direcionamento para reservas.",
-
-    image: "/projects/imperio-chales.jpg",
+      "Experiência digital responsiva criada para apresentação de pacotes, conteúdo e conversão de clientes.",
 
     technologies: [
       "React",
       "TypeScript",
-      "Tailwind CSS",
       "Vercel",
     ],
 
-    features: [
-      "Website responsivo",
-      "Apresentação dos chalés",
-      "Galeria de imagens",
-      "Contato direto",
-      "Integração com plataformas de reserva",
-      "SEO básico",
-    ],
+    backImage: "/projeto02.png",
 
-    year: "2026",
-    status: "Online",
+    /*
+     * Quando tivermos certeza do endereço publicado,
+     * basta colocar o link aqui.
+     *
+     * Exemplo:
+     * liveUrl: "https://seu-site.vercel.app",
+     */
+
+    liveUrl: "",
+
+    /*
+     * Repositório do projeto.
+     */
+    githubUrl: "https://github.com/granalta/granalta",
   },
+
+  /* =======================================================
+     PROJETO 03
+     PROJETO ESPECIAL
+  ======================================================= */
 
   {
     id: 3,
-    title: "Açaí do Bruxo",
-    category: "Website & Identidade Digital",
+
+    title: "Projeto Especial",
+
+    subtitle: "Web Experience",
+
     description:
-      "Experiência digital criada para uma marca de açaí com identidade visual própria e conceito criativo.",
-
-    longDescription:
-      "Website desenvolvido para apresentar produtos, identidade da marca e experiência visual do Açaí do Bruxo, utilizando elementos gráficos personalizados e uma interface moderna.",
-
-    image: "/projects/acai-do-bruxo.jpg",
+      "Projeto desenvolvido com foco em interface moderna, animações, experiência visual e navegação responsiva.",
 
     technologies: [
-      "React",
-      "TypeScript",
-      "CSS",
-      "Vercel",
+      "Next.js",
+      "GSAP",
+      "Tailwind CSS",
     ],
 
-    features: [
-      "Identidade visual personalizada",
-      "Cardápio digital",
-      "Interface responsiva",
-      "Animações",
-      "Apresentação de produtos",
-    ],
+    backImage: "/projeto03.png",
 
-    year: "2026",
-    status: "Em evolução",
-  },
+    /*
+     * Ainda vamos colocar o endereço correto
+     * deste projeto.
+     */
+    liveUrl: "",
 
-  {
-    id: 4,
-    title: "Granalta",
-    category: "Plataforma Web",
-    description:
-      "Plataforma de educação financeira com páginas de conteúdo, pacotes e experiência personalizada para usuários.",
-
-    longDescription:
-      "Projeto web desenvolvido para disponibilização de conteúdos de educação financeira, oferecendo diferentes pacotes, páginas exclusivas e experiência de navegação personalizada.",
-
-    image: "/projects/granalta.jpg",
-
-    technologies: [
-      "React",
-      "TypeScript",
-      "LocalStorage",
-      "Vercel",
-    ],
-
-    features: [
-      "Cadastro de usuários",
-      "Login",
-      "Pacotes personalizados",
-      "Landing pages",
-      "Interface responsiva",
-      "Persistência local",
-    ],
-
-    year: "2025",
-    status: "Online",
+    /*
+     * Caso queira disponibilizar o código,
+     * coloque o GitHub aqui.
+     */
+    githubUrl: "",
   },
 ];
+
+/* =========================================================
+   EXPORT DEFAULT
+========================================================= */
+
+export default projects;
