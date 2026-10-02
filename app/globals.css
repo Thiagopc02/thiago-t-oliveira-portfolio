@@ -1,26 +1,300 @@
 @import "tailwindcss";
 
+/* =========================================================
+   VARIÁVEIS GLOBAIS
+========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ededed;
 }
+
+/* =========================================================
+   TAILWIND THEME
+========================================================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   RESET / BASE
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000000;
 }
 
 body {
+  margin: 0;
+
   background: var(--background);
   color: var(--foreground);
+
   font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   SELEÇÃO DE TEXTO
+========================================================= */
+
+::selection {
+  background: rgba(34, 211, 238, 0.18);
+  color: #ffffff;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.35);
+}
+
+/* =========================================================
+   MASCOTES 3D
+   TECNOLOGIAS
+========================================================= */
+
+.technology-mascot {
+  animation: technologyMascotFloat 5.5s ease-in-out infinite;
+
+  transform-origin: center center;
+
+  will-change: transform;
+}
+
+@keyframes technologyMascotFloat {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(-1deg);
+  }
+
+  25% {
+    transform:
+      translate3d(0, -4px, 0)
+      rotate(-0.3deg);
+  }
+
+  50% {
+    transform:
+      translate3d(0, -9px, 0)
+      rotate(1deg);
+  }
+
+  75% {
+    transform:
+      translate3d(0, -4px, 0)
+      rotate(0.3deg);
+  }
+
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(-1deg);
+  }
+}
+
+/* =========================================================
+   ASSISTENTE IA
+   CHUVA DE CÓDIGOS
+========================================================= */
+
+.assistant-rain-column {
+  animation-name: assistantCodeRain;
+
+  animation-timing-function: linear;
+
+  animation-iteration-count: infinite;
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   QUEDA DOS CÓDIGOS
+========================================================= */
+
+@keyframes assistantCodeRain {
+  0% {
+    transform: translate3d(0, -35%, 0);
+
+    opacity: 0;
+  }
+
+  6% {
+    opacity: 0.15;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translate3d(0, 175%, 0);
+
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   PEQUENO BRILHO NAS LETRAS DA CHUVA
+========================================================= */
+
+.assistant-rain-column span {
+  text-shadow:
+    0 0 5px rgba(34, 211, 238, 0.2),
+    0 0 12px rgba(34, 211, 238, 0.08);
+}
+
+/* =========================================================
+   CURSOR DA IA
+========================================================= */
+
+.assistant-cursor {
+  animation: assistantCursorBlink 1s steps(1) infinite;
+}
+
+@keyframes assistantCursorBlink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+
+  49%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   PULSO DA IA
+   Podemos usar depois no indicador ONLINE
+========================================================= */
+
+.ai-status-pulse {
+  animation: aiStatusPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes aiStatusPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+
+    box-shadow:
+      0 0 6px rgba(52, 211, 153, 0.35);
+  }
+
+  50% {
+    opacity: 1;
+
+    box-shadow:
+      0 0 8px rgba(52, 211, 153, 0.9),
+      0 0 18px rgba(52, 211, 153, 0.35);
+  }
+}
+
+/* =========================================================
+   GLOW DE TEXTO PARA A IA
+========================================================= */
+
+.ai-text-glow {
+  text-shadow:
+    0 0 10px rgba(34, 211, 238, 0.12),
+    0 0 25px rgba(34, 211, 238, 0.06);
+}
+
+/* =========================================================
+   LINHA DIGITAL
+========================================================= */
+
+.ai-digital-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-digital-line::after {
+  content: "";
+
+  position: absolute;
+
+  left: -30%;
+  top: 0;
+
+  width: 30%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(103, 232, 249, 0.55),
+    transparent
+  );
+
+  animation: aiDigitalLineMove 4s linear infinite;
+}
+
+@keyframes aiDigitalLineMove {
+  0% {
+    left: -30%;
+  }
+
+  100% {
+    left: 130%;
+  }
+}
+
+/* =========================================================
+   REDUZ MOVIMENTO PARA ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .technology-mascot,
+  .assistant-rain-column,
+  .assistant-cursor,
+  .ai-status-pulse,
+  .ai-digital-line::after {
+    animation: none !important;
+  }
 }
