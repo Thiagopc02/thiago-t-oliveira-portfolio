@@ -75,6 +75,7 @@ export default function ProjectModal({
         fixed
         inset-0
         z-[200]
+
         flex
         items-center
         justify-center
@@ -82,9 +83,10 @@ export default function ProjectModal({
         bg-black/85
 
         p-3
+
         backdrop-blur-xl
 
-        sm:p-6
+        sm:p-5
       "
       onClick={onClose}
     >
@@ -99,21 +101,21 @@ export default function ProjectModal({
         className="
           relative
 
-          max-h-[92vh]
+          max-h-[84vh]
           w-full
-          max-w-5xl
+          max-w-3xl
 
           overflow-y-auto
           overflow-x-hidden
 
-          rounded-[28px]
+          rounded-[24px]
 
           border
           border-white/10
 
           bg-[#050708]
 
-          shadow-[0_40px_140px_rgba(0,0,0,0.85)]
+          shadow-[0_35px_110px_rgba(0,0,0,0.85)]
         "
       >
         {/* ===================================================
@@ -126,17 +128,17 @@ export default function ProjectModal({
             pointer-events-none
 
             absolute
-            right-[-180px]
-            top-[120px]
+            right-[-160px]
+            top-[100px]
 
-            h-[420px]
-            w-[420px]
+            h-[340px]
+            w-[340px]
 
             rounded-full
 
-            bg-cyan-400/[0.035]
+            bg-cyan-400/[0.03]
 
-            blur-[140px]
+            blur-[120px]
           "
         />
 
@@ -155,8 +157,8 @@ export default function ProjectModal({
             z-30
 
             flex
-            h-11
-            w-11
+            h-10
+            w-10
 
             items-center
             justify-center
@@ -166,7 +168,7 @@ export default function ProjectModal({
             border
             border-white/10
 
-            bg-black/70
+            bg-black/75
 
             text-white/60
 
@@ -179,13 +181,10 @@ export default function ProjectModal({
             hover:border-white/25
             hover:bg-white
             hover:text-black
-
-            sm:right-6
-            sm:top-6
           "
         >
           <X
-            size={18}
+            size={17}
             strokeWidth={1.7}
           />
         </button>
@@ -198,15 +197,15 @@ export default function ProjectModal({
           className="
             relative
 
-            min-h-[300px]
+            min-h-[210px]
 
             overflow-hidden
 
             border-b
             border-white/10
 
-            sm:min-h-[390px]
-            lg:min-h-[460px]
+            sm:min-h-[240px]
+            lg:min-h-[270px]
           "
         >
           {/* IMAGEM */}
@@ -219,7 +218,7 @@ export default function ProjectModal({
             sizes="
               (max-width: 640px) 100vw,
               (max-width: 1024px) 90vw,
-              1000px
+              768px
             "
             className="
               object-cover
@@ -256,7 +255,7 @@ export default function ProjectModal({
 
               bg-gradient-to-r
 
-              from-black/60
+              from-black/55
               via-transparent
               to-black/20
             "
@@ -268,19 +267,19 @@ export default function ProjectModal({
             aria-hidden="true"
             className="
               absolute
-              bottom-[-100px]
+              bottom-[-80px]
               left-1/2
 
-              h-[230px]
+              h-[170px]
               w-[70%]
 
               -translate-x-1/2
 
               rounded-full
 
-              bg-cyan-400/[0.05]
+              bg-cyan-400/[0.045]
 
-              blur-[90px]
+              blur-[75px]
             "
           />
 
@@ -295,10 +294,9 @@ export default function ProjectModal({
               bottom-0
               z-10
 
-              p-6
+              p-5
 
-              sm:p-8
-              lg:p-10
+              sm:p-6
             "
           >
             <div
@@ -312,12 +310,12 @@ export default function ProjectModal({
                 className="
                   font-mono
 
-                  text-[10px]
+                  text-[9px]
                   font-semibold
 
                   uppercase
 
-                  tracking-[0.3em]
+                  tracking-[0.28em]
 
                   text-cyan-300
                 "
@@ -328,7 +326,7 @@ export default function ProjectModal({
               <span
                 className="
                   h-px
-                  w-10
+                  w-8
                   bg-cyan-300/30
                 "
               />
@@ -336,18 +334,18 @@ export default function ProjectModal({
 
             <p
               className="
-                mt-4
+                mt-3
 
-                text-[10px]
+                text-[9px]
                 font-medium
 
                 uppercase
 
-                tracking-[0.3em]
+                tracking-[0.25em]
 
                 text-white/45
 
-                sm:text-xs
+                sm:text-[10px]
               "
             >
               {project.subtitle}
@@ -355,22 +353,21 @@ export default function ProjectModal({
 
             <h3
               className="
-                mt-3
+                mt-2
 
-                max-w-4xl
+                max-w-3xl
 
-                text-3xl
+                text-2xl
                 font-semibold
 
-                leading-[0.98]
+                leading-[1]
 
-                tracking-[-0.045em]
+                tracking-[-0.04em]
 
                 text-white
 
-                sm:text-4xl
-                lg:text-5xl
-                xl:text-6xl
+                sm:text-3xl
+                lg:text-4xl
               "
             >
               {project.title}
@@ -387,19 +384,18 @@ export default function ProjectModal({
             relative
             z-10
 
-            p-6
+            p-5
 
-            sm:p-8
-            lg:p-10
+            sm:p-6
           "
         >
           <div
             className="
               grid
-              gap-10
+              gap-7
 
-              lg:grid-cols-[1fr_320px]
-              lg:gap-14
+              lg:grid-cols-[1fr_240px]
+              lg:gap-8
             "
           >
             {/* =================================================
@@ -411,15 +407,14 @@ export default function ProjectModal({
                 className="
                   max-w-2xl
 
-                  text-base
+                  text-sm
                   font-medium
 
-                  leading-8
+                  leading-7
 
                   text-white/60
 
-                  sm:text-lg
-                  sm:leading-9
+                  sm:text-[15px]
                 "
               >
                 {project.description}
@@ -429,17 +424,17 @@ export default function ProjectModal({
                   TECNOLOGIAS
               ================================================ */}
 
-              <div className="mt-9">
+              <div className="mt-6">
                 <p
                   className="
-                    mb-4
+                    mb-3
 
-                    text-[9px]
+                    text-[8px]
                     font-semibold
 
                     uppercase
 
-                    tracking-[0.3em]
+                    tracking-[0.28em]
 
                     text-white/30
                   "
@@ -466,15 +461,15 @@ export default function ProjectModal({
 
                           bg-white/[0.02]
 
-                          px-4
-                          py-2
+                          px-3
+                          py-1.5
 
-                          text-[10px]
+                          text-[9px]
                           font-medium
 
                           uppercase
 
-                          tracking-[0.12em]
+                          tracking-[0.1em]
 
                           text-white/55
 
@@ -499,7 +494,7 @@ export default function ProjectModal({
 
               <div
                 className="
-                  mt-10
+                  mt-7
                   h-px
                   w-full
 
@@ -517,22 +512,22 @@ export default function ProjectModal({
 
               <div
                 className="
-                  mt-6
+                  mt-5
 
                   flex
                   items-center
                   justify-between
-                  gap-5
+                  gap-4
                 "
               >
                 <div>
                   <p
                     className="
-                      text-[9px]
+                      text-[8px]
 
                       uppercase
 
-                      tracking-[0.28em]
+                      tracking-[0.26em]
 
                       text-white/25
                     "
@@ -542,7 +537,7 @@ export default function ProjectModal({
 
                   <p
                     className="
-                      mt-2
+                      mt-1.5
 
                       text-sm
                       font-medium
@@ -558,11 +553,11 @@ export default function ProjectModal({
                   className="
                     font-mono
 
-                    text-[10px]
+                    text-[9px]
 
                     uppercase
 
-                    tracking-[0.2em]
+                    tracking-[0.18em]
 
                     text-cyan-300/50
                   "
@@ -580,18 +575,16 @@ export default function ProjectModal({
               className="
                 h-fit
 
-                rounded-[22px]
+                rounded-[18px]
 
                 border
                 border-white/10
 
                 bg-white/[0.025]
 
-                p-5
+                p-4
 
                 backdrop-blur-xl
-
-                sm:p-6
               "
             >
               <div
@@ -604,8 +597,8 @@ export default function ProjectModal({
                 <div
                   className="
                     flex
-                    h-10
-                    w-10
+                    h-9
+                    w-9
 
                     items-center
                     justify-center
@@ -621,7 +614,7 @@ export default function ProjectModal({
                   "
                 >
                   <ExternalLink
-                    size={17}
+                    size={15}
                     strokeWidth={1.6}
                   />
                 </div>
@@ -631,7 +624,6 @@ export default function ProjectModal({
                     className="
                       text-sm
                       font-semibold
-
                       text-white
                     "
                   >
@@ -641,13 +633,11 @@ export default function ProjectModal({
                   <p
                     className="
                       mt-0.5
-
-                      text-[11px]
-
+                      text-[10px]
                       text-white/30
                     "
                   >
-                    Veja o projeto funcionando.
+                    Veja funcionando.
                   </p>
                 </div>
               </div>
@@ -658,8 +648,8 @@ export default function ProjectModal({
 
               <div
                 className="
-                  mt-6
-                  space-y-3
+                  mt-4
+                  space-y-2.5
                 "
               >
                 {/* SITE AO VIVO */}
@@ -682,8 +672,8 @@ export default function ProjectModal({
 
                       bg-white
 
-                      px-5
-                      py-3.5
+                      px-4
+                      py-3
 
                       text-sm
                       font-semibold
@@ -704,7 +694,7 @@ export default function ProjectModal({
                     </span>
 
                     <ArrowUpRight
-                      size={16}
+                      size={15}
                       strokeWidth={1.8}
                       className="
                         transition-transform
@@ -740,8 +730,8 @@ export default function ProjectModal({
 
                       bg-white/[0.015]
 
-                      px-5
-                      py-3.5
+                      px-4
+                      py-3
 
                       text-sm
                       font-medium
@@ -767,7 +757,7 @@ export default function ProjectModal({
                       "
                     >
                       <Code2
-                        size={15}
+                        size={14}
                         strokeWidth={1.6}
                       />
 
@@ -775,7 +765,7 @@ export default function ProjectModal({
                     </span>
 
                     <ArrowUpRight
-                      size={15}
+                      size={14}
                       strokeWidth={1.8}
                       className="
                         transition-transform
@@ -797,30 +787,29 @@ export default function ProjectModal({
                 !project.githubUrl && (
                   <div
                     className="
-                      mt-6
+                      mt-4
 
-                      rounded-2xl
+                      rounded-xl
 
                       border
                       border-white/10
 
                       bg-black/30
 
-                      px-4
-                      py-4
+                      px-3
+                      py-3
                     "
                   >
                     <p
                       className="
-                        text-xs
+                        text-[11px]
                         leading-5
 
                         text-white/35
                       "
                     >
                       Este projeto ainda não
-                      possui acesso público
-                      disponível.
+                      possui acesso público.
                     </p>
                   </div>
                 )}
@@ -831,12 +820,12 @@ export default function ProjectModal({
 
               <div
                 className="
-                  mt-6
+                  mt-4
 
                   border-t
                   border-white/10
 
-                  pt-5
+                  pt-4
                 "
               >
                 <div
@@ -848,7 +837,7 @@ export default function ProjectModal({
                 >
                   <span
                     className="
-                      text-[9px]
+                      text-[8px]
 
                       uppercase
 
@@ -866,12 +855,12 @@ export default function ProjectModal({
                       items-center
                       gap-2
 
-                      text-[10px]
+                      text-[9px]
                       font-medium
 
                       uppercase
 
-                      tracking-[0.15em]
+                      tracking-[0.14em]
 
                       text-emerald-300/70
                     "
