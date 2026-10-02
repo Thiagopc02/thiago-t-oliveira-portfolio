@@ -8,7 +8,8 @@ export default function Projects() {
       id="projetos"
       className="
         relative
-        overflow-hidden
+        overflow-x-clip
+        overflow-y-visible
         bg-black
         text-white
       "
@@ -55,17 +56,14 @@ export default function Projects() {
           CONTEÚDO
       ====================================================== */}
 
-      <div className="relative z-10">
-
+      <div
+        className="
+          relative
+          z-10
+        "
+      >
         {/* ===================================================
             CABEÇALHO
-
-            IMPORTANTE:
-            NÃO existe mais max-w-7xl aqui.
-
-            Dessa forma a imagem consegue realmente ir
-            para a esquerda e o texto para a direita
-            em monitores grandes.
         ==================================================== */}
 
         <div
@@ -93,8 +91,17 @@ export default function Projects() {
             CARTAS
         ==================================================== */}
 
-        <ProjectRevealDeck />
-
+        <div
+          className="
+            relative
+            z-20
+            w-full
+            overflow-visible
+            pointer-events-auto
+          "
+        >
+          <ProjectRevealDeck />
+        </div>
       </div>
     </section>
   );
